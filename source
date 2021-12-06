@@ -1,0 +1,73 @@
+
+-- █▀ █▀▀ █▀█ █ █▀█ ▀█▀   █▀▄▀█ ▄▀█ █▀▄ █▀▀   █▄▄ █▄█   ▀█▀ █▀█ ▄▀█ █▀ █░█ ▀█▀ █ █▀▀ ▀█
+-- ▄█ █▄▄ █▀▄ █ █▀▀ ░█░   █░▀░█ █▀█ █▄▀ ██▄   █▄█ ░█░   ░█░ █▀▄ █▀█ ▄█ █▀█ ░█░ █ █▄▄ █▄
+
+_G.autoClick = false;
+_G.noclip = false
+
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+
+local w = library:CreateWindow("Trashticz Fencing Gui") -- Creates the window
+
+local b = w:CreateFolder("Stuff") -- Creates the folder(U will put here your buttons,etc)
+
+b:Slider("Speed",{
+    min = 16; -- min value of the slider
+    max = 256; -- max value of the slider
+    precise = false; -- max 2 decimals
+},function(value)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+end)
+
+b:Slider("JumpPower",{
+    min = 16; -- min value of the slider
+    max = 256; -- max value of the slider
+    precise = false; -- max 2 decimals
+},function(jvalue)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = jvalue
+end)
+
+b:Button("Reset",function()
+    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+end)
+
+b:Button("Teleport",function()
+    teleportTO(game:GetService("Workspace")["Button"].CFrame)
+end)
+
+b:Button("Fling",function()
+    power = 900 -- change this (higher = faster, lower = slower)
+game:GetService('RunService').Stepped:connect(function()
+end)
+wait(.1)
+local bambam = Instance.new("BodyThrust")
+bambam.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+bambam.Force = Vector3.new(power,0,power)
+bambam.Location = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+end)
+
+b:DestroyGui()
+
+function teleportTO(placeCFrame)
+    local plyr = game.Players.LocalPlayer;
+    if plyr.Character then
+        plyr.Character.HumanoidRootPart.CFrame = placeCFrame;
+    end
+end
+
+print("Script Loaded, Script Made by Trashticz#5558")
+
+
+local function Notification(Text)
+end
+ 
+local NotificationBindable = Instance.new("BindableFunction")
+NotificationBindable.OnInvoke = Notification
+ 
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Script Loaded";
+    Text = "Script Made by Trashticz#5558";
+    Icon = "http://www.roblox.com/asset/?id=6949300577";
+    Duration = "5";
+    Notification = NotificationBindable;
+})
